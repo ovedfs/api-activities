@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\User;
 use App\Helpers\Logger;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

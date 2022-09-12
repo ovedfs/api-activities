@@ -13,17 +13,17 @@ class ArrendadorController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('can:properties.index')->only('listProperties');
-        // $this->middleware('can:properties.store')->only('storeProperty');
-        // $this->middleware('can:contracts.index')->only('listContracts');
-        // $this->middleware('can:contracts.store')->only('storeContract');
+        $this->middleware('can:properties.index')->only('listProperties');
+        $this->middleware('can:properties.store')->only('storeProperty');
+        $this->middleware('can:contracts.index')->only('listContracts');
+        $this->middleware('can:contracts.store')->only('storeContract');
     }
     
     public function listProperties()
     {
-        //$properties = auth()->user()->properties;
-        $user = User::find(2);
-        $properties = $user->properties;
+        $properties = auth()->user()->properties;
+        // $user = User::find(2);
+        // $properties = $user->properties;
 
         Logger::add('Obteniendo el listado de propiedades');
 
@@ -60,9 +60,9 @@ class ArrendadorController extends Controller
 
     public function listContracts()
     {
-        $user = User::find(2);
-        //$contracts = auth()->user()->contracts;
-        $contracts = $user->contracts;
+        //$user = User::find(2);
+        $contracts = auth()->user()->contracts;
+        //$contracts = $user->contracts;
 
         Logger::add('Obteniendo el listado de contratos');
 
@@ -82,6 +82,8 @@ class ArrendadorController extends Controller
         $contract = new Contract();
         $contract->content = $request->content;
         $contract->user_id = auth()->user()->id;
+        // Validar que la propiedad sea de este arrendador ...
+        $contract->property_id = $request->property_id;
 
         if($contract->save()) {
 

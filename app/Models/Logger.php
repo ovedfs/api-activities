@@ -12,6 +12,6 @@ class Logger extends Model
     protected $table = 'logs';
 
     protected $fillable = [
-        'subject', 'url', 'method', 'ip', 'agent', 'user_id', 'role'
+        'activity', 'url', 'method', 'ip', 'agent', 'user_id', 'role'
     ];
 }

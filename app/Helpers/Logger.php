@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 use Request;
+use App\Models\User;
 use App\Models\Logger as LoggerModel;
 
 class Logger
