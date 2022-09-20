@@ -19,8 +19,13 @@ class Property extends Model
         return $this->belongsTo(User::class);
     }
 
+    // public function contract()
+    // {
+    //     return $this->belongsTo(Contract::class);
+    // }
+
     public function contract()
     {
-        return $this->belongsTo(Contract::class);
+        return $this->hasOne(Contract::class);
     }
 }

@@ -52,4 +52,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Contract::class);
     }
+
+    public function hasProperty($id)
+    {
+        return $this->properties->contains($id);
+    }
+
+    public function isPropertyInContract($property_id)
+    {
+        return $this->contracts
+            ->filter(fn($c) => $c->property->id == $property_id)
+            ->count();
+    }
 }

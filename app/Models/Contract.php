@@ -22,7 +22,7 @@ class Contract extends Model
 
     public function property()
     {
-        return $this->hasOne(Property::class);
+        return $this->belongsTo(Property::class);
     }
 
     public function payments()

@@ -22,8 +22,6 @@ class ArrendadorController extends Controller
     public function listProperties()
     {
         $properties = auth()->user()->properties;
-        // $user = User::find(2);
-        // $properties = $user->properties;
 
         Logger::add('Obteniendo el listado de propiedades');
 
@@ -60,9 +58,7 @@ class ArrendadorController extends Controller
 
     public function listContracts()
     {
-        //$user = User::find(2);
         $contracts = auth()->user()->contracts;
-        //$contracts = $user->contracts;
 
         Logger::add('Obteniendo el listado de contratos');
 
@@ -79,10 +75,23 @@ class ArrendadorController extends Controller
             'property_id' => 'required',
         ]);
 
+        // Validar que la propiedad sea de este arrendador ...
+        if(! auth()->user()->hasProperty($request->property_id)) {
+            return response()->json([
+                'message' => 'Acción no autorizada, la propiedad no pertenece a este usuario',
+            ]);
+        }
+
+        // Verificar que la propiedad no este vinculada a otro contrato (de este user)
+        if(auth()->user()->isPropertyInContract($request->property_id)) {
+            return response()->json([
+                'message' => 'Acción no autorizada, la propiedad esta vinculada a otro contrato',
+            ]);
+        }
+
         $contract = new Contract();
         $contract->content = $request->content;
         $contract->user_id = auth()->user()->id;
-        // Validar que la propiedad sea de este arrendador ...
         $contract->property_id = $request->property_id;
 
         if($contract->save()) {
