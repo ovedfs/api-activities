@@ -15,6 +15,11 @@ class Payment extends Model
         'amount_type_id',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function contract()
     {
         return $this->belongsTo(Contract::class);

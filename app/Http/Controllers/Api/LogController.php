@@ -9,6 +9,12 @@ use App\Http\Controllers\Controller;
 
 class LogController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:logs.history')->only('history');
+        $this->middleware('can:logs.historyByUser')->only('historyByUser');
+    }
+
     public function history()
     {
         return response()->json([

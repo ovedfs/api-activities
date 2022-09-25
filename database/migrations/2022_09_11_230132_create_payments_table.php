@@ -17,6 +17,12 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->float('amount');
 
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+
             $table->unsignedBigInteger('contract_id');
             $table->foreign('contract_id')
                 ->references('id')

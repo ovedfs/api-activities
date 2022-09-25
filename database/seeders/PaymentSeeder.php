@@ -18,11 +18,13 @@ class PaymentSeeder extends Seeder
         Contract::all()->each(function($contract){
             $contract->payments()->create([
                 'payment_type_id' => 1,
-                'amount' => rand(1000, 10000)
+                'amount' => rand(1000, 10000),
+                'user_id' => $contract->user_id
             ]);
             $contract->payments()->create([
                 'payment_type_id' => rand(2,3),
-                'amount' => rand(1000, 10000)
+                'amount' => rand(1000, 10000),
+                'user_id' => $contract->user_id
             ]);
         });
     }

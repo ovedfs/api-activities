@@ -22,8 +22,12 @@ class RolesAndPermissionsSeeder extends Seeder
 
         Permission::create(['name' => 'properties.index'])->syncRoles([$arrendador]);
         Permission::create(['name' => 'properties.store'])->syncRoles([$arrendador]);
+
         Permission::create(['name' => 'contracts.index'])->syncRoles([$arrendador]);
         Permission::create(['name' => 'contracts.store'])->syncRoles([$arrendador]);
+
+        Permission::create(['name' => 'payments.index'])->syncRoles([$arrendador]);
+        Permission::create(['name' => 'payments.store'])->syncRoles([$arrendador]);
         
         Permission::create(['name' => 'logs.history'])->syncRoles([$admin]);
         Permission::create(['name' => 'logs.historyByUser'])->syncRoles([$admin]);
